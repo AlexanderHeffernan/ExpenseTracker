@@ -1,57 +1,112 @@
+/*
+ * Main Stylesheet
+ * Author: Alexander Heffernan
+ * Created: February 12, 2024
+*/
+
+/* Base styles */
+
 * {
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+
+body {
   font-family: 'Roboto', sans-serif;
-}
-
-.Budget p {
-  padding-top: 150px;
-  padding-left: 24px;
-  font-size: 22px;
+  font-size: 16px;
+  background-color: #3498db;
   color: #2c3e50;
-  font-weight: 600;
-}
-
-h2 {
-  padding-top: 10px;
-  padding-left: 24px;
-  font-size: 60px;
-  font-weight: 800;
-  color: #2ecc71;
-  text-shadow: 4px 4px 3px #2c3e507c;
-}
-
-h2.negative {
-  color: #e74c3c;
-}
-
-h3 {
-  font-size: 25px;
-  font-weight: 800;
-  color: #2c3e50;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .App {
-  width: 100%;
   height: 100vh;
-  background-color: #3498db;
-  flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-.Budget {
-  height: 300px;
-
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-weight: 800;
 }
+
+h1 {
+  font-size: 4em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  line-height: 1.6;
+}
+
+button {
+  background-color: #3498db;
+  outline: none;
+  border: none;
+  color: #2c3e50;
+}
+
+input {
+  background: none;
+  outline: none;
+  border: none;
+  color: #2c3e50;
+}
+
+input::placeholder {
+  color: #2c3e5071;
+  font-style: italic;
+}
+
+.positive {
+  color: #2ecc71;
+}
+
+.negative {
+  color: #e74c3c;
+}
+
+/* Top section styles */
+
+header {
+  max-height: 300px;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+}
+
+header p {
+  margin-top: auto;
+  font-size: 22px;
+}
+
+header h1 {
+  text-shadow: 4px 4px 3px #2c3e507c;
+}
+
+/* Expense list card */
 
 .ExpenseList {
   flex: 1;
   background-color: #ecf0f1;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  border-radius: 25px 25px 0 0;
   padding: 25px;
+
+  /* Decrease scale when card is not in focus */
   transition: transform 0.5s ease;
 }
 
@@ -59,62 +114,74 @@ h3 {
   transform: scale(0.9);
 }
 
-.ExpenseHeading {
+/* Expense list card heading */
+
+.ExpenseList .ExpenseHeading {
   display: flex;
-  justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.ExpenseHeading p {
+.ExpenseList .ExpenseHeading p {
   margin-left: auto;
-  color: #e74c3c;
-  font-weight: 800;
   font-size: 22px;
 }
 
-.Expense {
+/* Expense list card expenses */
+
+.ExpenseList .Expense {
   display: flex;
-  justify-content: space-between;
   padding: 5px 0 5px 0;
 }
 
-.Expense .Name {
-  color: #2c3e50;
-}
-
-.Expense .Amount {
+.ExpenseList .Expense .Amount {
   margin-left: auto;
-  color: #e74c3c;
-  font-weight: 800;
-  font-size: 16px;
 }
 
-.AddExpenseBtn {
+/* Expense list add expense button */
+
+.ExpenseList .AddExpenseBtn {
   position: absolute;
-  bottom: 20px;
+  bottom: 100px;
   right: 20px;
-  outline: none;
-  border: none;
   border-radius: 100%;
-  width: 40px;
-  height: 40px;
+  width: 60px;
+  height: 60px;
+  font-size: 40px;
 }
+
+/* Add expense overlay card */
 
 .AddExpense {
   position: absolute;
   bottom: 0;
+  width: 100%;
   height: 0;
   background-color: #ecf0f1;
-  width: 100%;
-  transition: height 0.5s ease;
-  border-top-left-radius: 25px;
-  border-top-right-radius: 25px;
+  border-radius: 25px 25px 0 0;
   box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.3);
+
+  /* Height transitions when user opens AddExpense card */
+  transition: height 0.5s ease;
 }
 
 .AddExpense.active {
-  height: 90%;
-  display: block;
+  height: 85%;
+}
+
+.AddExpense .ExpenseForm {
+  margin: 24px;
+}
+
+.AddExpense .FormHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.AddExpense .FormHeader h3 {
+  text-align: center;
+  flex-grow: 1;
+  margin: 0;
 }
 
 .AddExpense .Close {
@@ -123,4 +190,35 @@ h3 {
   border-radius: 100%;
   width: 40px;
   height: 40px;
+  font-size: 20px;
+  
+}
+
+.AddExpense .InputGroup {
+  display: flex;
+}
+
+.AddExpense .InputGroup p {
+  font-size: 60px;
+}
+
+.AddExpense .InputGroup input {
+  font-size: 60px;
+  border: none;
+  height: auto;
+  width: 80%;
+}
+
+.AddExpense input {
+  height: 70px;
+  font-size: 40px;
+  border-bottom: 3px solid #2c3e5071;
+  border-radius: 0 0 3px 3px;
+  margin-bottom: 20px;
+}
+
+.AddExpense .Submit {
+  font-size: 28px;
+  border-radius: 10px;
+  padding: 10px 100px;
 }
