@@ -105,8 +105,12 @@ function App() {
     <div className="App">
       {/* Top section of the app containing current months budget */}
       <header>
-        <p>{monthNames[currentMonth]} Budget</p>
-        <h1 className={`${budget[currentYear][currentMonth] - calculateTotalExpenses() < 0 ? 'negative' : 'positive'}`}>${(budget[currentYear][currentMonth] - calculateTotalExpenses()).toFixed(2)}</h1>
+        <button className={`${budget[currentYear][currentMonth-1] ? '' : 'hidden'}`}><i className="fa-solid fa-chevron-left" /></button>
+        <div className="CurrentMonth">
+          <p>{monthNames[currentMonth]} Budget</p>
+          <h1 className={`${budget[currentYear][currentMonth] - calculateTotalExpenses() < 0 ? 'negative' : 'positive'}`}>${(budget[currentYear][currentMonth] - calculateTotalExpenses()).toFixed(2)}</h1>
+        </div>
+        <button className={`${budget[currentYear][currentMonth+1] ? '' : 'hidden'}`}><i className="fa-solid fa-chevron-right" /></button>
       </header>
 
       {/* Expense list card */}
